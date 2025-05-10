@@ -1,9 +1,9 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <sstream>
+#include<iostream>
+#include<fstream>
+#include<vector>
+#include<sstream>
 #include<math.h>
-#include <string>
+#include<string>
 
 using namespace std; 
 
