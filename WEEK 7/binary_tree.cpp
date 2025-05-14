@@ -145,4 +145,3 @@ int countLeaf(Node* root) {
     }
     return cnt;
 }
-
