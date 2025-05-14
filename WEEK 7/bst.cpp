@@ -66,7 +66,7 @@ Node* deleteNode(Node* root,int x) {
     if(root->key > x) {
         root->left = deleteNode(root->left,x);
     }
-    else if(root->key > x) {
+    else if(root->key < x) {
         root->right = deleteNode(root->right,x);
     }
     else {
@@ -87,7 +87,7 @@ Node* deleteNode(Node* root,int x) {
     return root;
 }
 
-void Remove(Node* root,int x) {
+void Remove(Node*& root,int x) {
     root = deleteNode(root,x);
 }
 
@@ -157,3 +157,13 @@ bool isFullbst(Node* root) {
 bool isFullBST(Node* root) {
     return isBST(root) && isFullbst(root);
 }
+
+void inOrder(Node* root) {
+    if(root != NULL) {
+        inOrder(root->left);
+        cout << root->key << " ";
+        inOrder(root->right);
+    }
+}
+
+
