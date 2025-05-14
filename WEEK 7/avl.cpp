@@ -176,10 +176,6 @@ bool isBST(Node* root) {
     return true;
 }
 
-bool isAVL(Node* root) {
-    return isBST(root) && checkIfAVL(root);
-}
-
 void inorder(Node* root) {
     if(root != NULL) {
         inorder(root->left);
@@ -188,18 +184,6 @@ void inorder(Node* root) {
     }
 }
 
-int main() {
-    Node* root = NULL;
-    Insert(root,8);
-    Insert(root,5);
-    Insert(root,1);
-    Insert(root,19);
-    Insert(root,6);
-    Insert(root,17);
-    Insert(root,25);
-
-    cout << isAVL(root) << endl;
-
-
-    return 0;
+bool isAVL(Node* root) {
+    return isBST(root) && checkIfAVL(root);
 }
