@@ -13,6 +13,8 @@ struct Company {
     string address;
 };
 
+
+
 struct HashTable {
     Company hashTable[2000];
 };
