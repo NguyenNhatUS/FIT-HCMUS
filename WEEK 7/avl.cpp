@@ -123,23 +123,24 @@ Node* deleteNode(Node*& root,int x) {
             root->right = deleteNode(root->right,succ->key);
         }
     }
+    if(root == NULL) return NULL;
     root->height = 1 + max(getHeight(root->left),getHeight(root->right));
     int balance = getBalance(root);
     // Right Right Case
-    if(balance < -1 && x > root->right->key) {
+    if (balance < -1 && getBalance(root->right) <= 0) {
         return leftRotate(root);
     }
-    // Left Left Case
-    if(balance > 1 && x < root->left->key) {
-        return rightRotate(root);
-    }
     // Right Left Case
-    if(balance < -1 && x > root->right->key) {
+    if (balance < -1 && getBalance(root->right) > 0) {
         root->right = rightRotate(root->right);
         return leftRotate(root);
     }
+    // Left Left Case
+    if (balance > 1 && getBalance(root->left) >= 0) {
+        return rightRotate(root);
+    }
     // Left Right Case
-    if(balance > 1 && x > root->left->key) {
+    if (balance > 1 && getBalance(root->left) < 0) {
         root->left = leftRotate(root->left);
         return rightRotate(root);
     }
@@ -150,10 +151,55 @@ void Remove(Node*& root,int x) {
     root = deleteNode(root,x);   
 }
 
-bool isAVL(Node* root) {
+bool checkIfAVL(Node* root) {
     if(root == NULL) return true;
     int leftHeight = getHeight(root->left);
     int rightHeight = getHeight(root->right);
     if(abs(leftHeight - rightHeight) > 1) return false;
-    return isAVL(root->left) && isAVL(root->right);
+    return checkIfAVL(root->left) && checkIfAVL(root->right);
+}
+
+void inOrder(Node* root,vector<int>& res) {
+    if(root != NULL) {
+        inOrder(root->left,res);
+        res.push_back(root->key);
+        inOrder(root->right,res);
+    }
+}
+
+bool isBST(Node* root) {
+    vector<int> res;
+    inOrder(root,res);
+    for(int i = 0;i < res.size() - 1;i++) {
+        if(res[i] >= res[i + 1]) return false;
+    }
+    return true;
+}
+
+bool isAVL(Node* root) {
+    return isBST(root) && checkIfAVL(root);
+}
+
+void inorder(Node* root) {
+    if(root != NULL) {
+        inorder(root->left);
+        cout << root->key << " ";
+        inorder(root->right);
+    }
+}
+
+int main() {
+    Node* root = NULL;
+    Insert(root,8);
+    Insert(root,5);
+    Insert(root,1);
+    Insert(root,19);
+    Insert(root,6);
+    Insert(root,17);
+    Insert(root,25);
+
+    cout << isAVL(root) << endl;
+
+
+    return 0;
 }
