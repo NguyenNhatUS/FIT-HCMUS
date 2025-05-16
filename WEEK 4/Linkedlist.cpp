@@ -369,22 +369,17 @@ List *reverseList(List *L)
     return newList;
 }
 
-void removeDuplicate(List *&L)
-{
+void removeDuplicate(List *&L) {
     NODE *curr = L->p_head;
-    while (curr != nullptr)
-    {
+    while (curr != nullptr) {
         NODE *runner = curr;
-        while (runner->p_next != nullptr)
-        {
-            if (runner->p_next->key == curr->key)
-            {
+        while (runner->p_next != nullptr) {
+            if (runner->p_next->key == curr->key) {
                 NODE *temp = runner->p_next;
-                runner->p_next = runner->p_next->p_next;
+                runner->p_next = temp->p_next;
                 delete temp;
             }
-            else
-            {
+            else {
                 runner = runner->p_next;
             }
         }
@@ -393,27 +388,21 @@ void removeDuplicate(List *&L)
     return;
 }
 
-bool removeElement(List *&L, int key)
-{
-    if (L->p_head == NULL)
-        return false;
-    while (L->p_head != NULL && L->p_head->key == key)
-    {
+bool removeElement(List *&L, int key) {
+    if (L->p_head == NULL) return false;
+    while (L->p_head != NULL && L->p_head->key == key) {
         NODE *tmp = L->p_head;
         L->p_head = tmp->p_next;
         delete tmp;
     }
     NODE *curr = L->p_head;
-    while (curr != nullptr && curr->p_next != nullptr)
-    {
-        if (curr->p_next->key == key)
-        {
+    while (curr != nullptr && curr->p_next != nullptr) {
+        if (curr->p_next->key == key) {
             NODE *temp = curr->p_next;
             curr->p_next = curr->p_next->p_next;
             delete temp;
         }
-        else
-        {
+        else {
             curr = curr->p_next;
         }
     }

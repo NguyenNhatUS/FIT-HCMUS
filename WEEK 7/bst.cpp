@@ -14,16 +14,9 @@ struct Node {
 };
 
 Node* Search(Node* root,int x) {
-    if(root == NULL) return root;
-    if(root->key > x) {
-        root->left = Search(root->left,x);
-    }
-    else if(root->key < x) {
-        root->right = Search(root->right,x);
-    }
-    else {
-        return root;
-    }
+    if(root == NULL || root->key == x) return root;
+    if(root->key > x) return Search(root->left,x);
+    return Search(root->right,x);
 }
 
 void Insert(Node*& root,int x) {
@@ -100,10 +93,10 @@ Node* createTree(int a[],int n) {
 }
 
 void removeTree(Node* root) {
-    if(root == NULL) return;
+    if (root == NULL) return;
     removeTree(root->left);
     removeTree(root->right);
-    Remove(root,root->key);
+    delete root;
 }
 
 int Height(Node* root) {
