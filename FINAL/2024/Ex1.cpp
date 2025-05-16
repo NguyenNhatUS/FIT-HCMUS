@@ -229,12 +229,12 @@ void remove(Node*& pRoot,int *a,int n) {
 }
 
 int main() {
-    Node* root = createTree("AVL.txt");
-    cout << "Level Order Traversal of AVL Tree:\n";
+    Node* root = createTree("inputAVL.txt");
+    cout << "Level Order Traversal of AVL Tree: " << endl;
     levelOrder(root);
-    // int arr[] = {1, 2, 3}; 
-    // remove(root, arr, 3);
-    // cout << "\nTree after removal:\n";
-    // levelOrder(root);
+    int arr[] = {1, 2, 3}; 
+    remove(root, arr, 3);
+    cout << "Tree after removal:" << endl;
+    levelOrder(root);
     return 0;
 }
