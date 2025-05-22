@@ -13,8 +13,6 @@ struct Company {
     string address;
 };
 
-
-
 struct HashTable {
     Company hashTable[2000];
 };
@@ -118,12 +116,10 @@ int main(int argc,char* argv[]) {
     string taxFile = argv[1];
     string inputFile = argv[2];
     string outputFile = argv[3];
-
     ifstream fin(inputFile);
     ofstream fout(outputFile);
     vector<Company> list_company = readCompanyList(taxFile);
     HashTable* hash_table = createHashTable(list_company);
-
     string line;
     while(getline(fin, line)) {
         if (line.empty()) continue;
