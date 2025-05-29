@@ -13,7 +13,7 @@ struct List
 {
     NODE *p_head;
     NODE *p_tail;
-    List(NODE *head = nullptr, NODE *tail = nullptr) : p_head(head), p_tail(tail) {}
+    List(NODE *head = NULL, NODE *tail = NULL) : p_head(head), p_tail(tail) {}
 };
 
 // --- Define function prototypes ---
@@ -40,8 +40,8 @@ bool removeElement(List *&L, int key);
 List *createListFromArray(int arr[], int n)
 {
     List *newList = new List();
-    newList->p_head = nullptr;
-    newList->p_tail = nullptr;
+    newList->p_head = NULL;
+    newList->p_tail = NULL;
     for (int i = 0; i < n; ++i)
     {
         addTail(newList, arr[i]);
@@ -52,8 +52,8 @@ List *createListFromArray(int arr[], int n)
 // function to compare two lists
 bool areListsEqual(List *list1, List *list2)
 {
-    NODE *current1 = list1 ? list1->p_head : nullptr;
-    NODE *current2 = list2 ? list2->p_head : nullptr;
+    NODE *current1 = list1 ? list1->p_head : NULL;
+    NODE *current2 = list2 ? list2->p_head : NULL;
     while (current1 && current2)
     {
         if (current1->key != current2->key)
@@ -63,7 +63,7 @@ bool areListsEqual(List *list1, List *list2)
         current1 = current1->p_next;
         current2 = current2->p_next;
     }
-    return (current1 == nullptr && current2 == nullptr);
+    return (current1 == NULL && current2 == NULL);
 }
 
 // function to free the memory of a list
@@ -112,7 +112,7 @@ bool addHead(List *&L, int data)
 bool addTail(List *&L, int data) // this function is kept for createListfromArray function
 {
     NODE *newNode = createNode(data);
-    if (L->p_head == nullptr)
+    if (L->p_head == NULL)
     {
         L->p_head = newNode;
         L->p_tail = newNode;
@@ -357,12 +357,10 @@ int countElements(List *L)
     return cnt;
 }
 
-List *reverseList(List *L)
-{
+List *reverseList(List *L) {
     List *newList = new List;
     NODE *tmp = L->p_head;
-    while (tmp != NULL)
-    {
+    while (tmp != NULL) {
         addHead(newList, tmp->key);
         tmp = tmp->p_next;
     }
@@ -371,9 +369,9 @@ List *reverseList(List *L)
 
 void removeDuplicate(List *&L) {
     NODE *curr = L->p_head;
-    while (curr != nullptr) {
+    while (curr != NULL) {
         NODE *runner = curr;
-        while (runner->p_next != nullptr) {
+        while (runner->p_next != NULL) {
             if (runner->p_next->key == curr->key) {
                 NODE *temp = runner->p_next;
                 runner->p_next = temp->p_next;
@@ -396,7 +394,7 @@ bool removeElement(List *&L, int key) {
         delete tmp;
     }
     NODE *curr = L->p_head;
-    while (curr != nullptr && curr->p_next != nullptr) {
+    while (curr != NULL && curr->p_next != NULL) {
         if (curr->p_next->key == key) {
             NODE *temp = curr->p_next;
             curr->p_next = curr->p_next->p_next;
@@ -418,7 +416,7 @@ int main()
     // Test case 1: createNode /////////////////////////////////////////////////
     std::cout << "Test createNode: ";
     NODE *node1 = createNode(10);
-    assert(node1 != nullptr && node1->key == 10 && node1->p_next == nullptr);
+    assert(node1 != NULL && node1->key == 10 && node1->p_next == NULL);
     std::cout << "Passed" << std::endl;
     delete node1;
 
@@ -426,7 +424,7 @@ int main()
     std::cout << "Test createList: ";
     NODE *head2 = createNode(20);
     List *list2 = createList(head2);
-    assert(list2 != nullptr && list2->p_head == head2 && list2->p_tail == head2);
+    assert(list2 != NULL && list2->p_head == head2 && list2->p_tail == head2);
     std::cout << "Passed" << std::endl;
     freeList(list2);
 
@@ -434,7 +432,7 @@ int main()
     std::cout << "Test addHead: ";
     List *list3 = new List();
     assert(addHead(list3, 30));
-    assert(list3->p_head != nullptr && list3->p_head->key == 30 && list3->p_tail->key == 30);
+    assert(list3->p_head != NULL && list3->p_head->key == 30 && list3->p_tail->key == 30);
     assert(addHead(list3, 40));
     assert(list3->p_head->key == 40 && list3->p_head->p_next->key == 30 && list3->p_tail->key == 30);
     std::cout << "Passed" << std::endl;
@@ -444,7 +442,7 @@ int main()
     std::cout << "Test addTail: ";
     List *list4 = new List();
     assert(addTail(list4, 50));
-    assert(list4->p_head != nullptr && list4->p_head->key == 50 && list4->p_tail->key == 50);
+    assert(list4->p_head != NULL && list4->p_head->key == 50 && list4->p_tail->key == 50);
     assert(addTail(list4, 60));
     assert(list4->p_head->key == 50 && list4->p_tail->key == 60 && list4->p_head->p_next->key == 60);
     std::cout << "Passed" << std::endl;
@@ -456,7 +454,7 @@ int main()
     List *list5 = createListFromArray(arr1, 3);
     assert(removeHead(list5) && list5->p_head->key == 80);
     assert(removeHead(list5) && list5->p_head->key == 90);
-    assert(removeHead(list5) && list5->p_head == nullptr && list5->p_tail == nullptr);
+    assert(removeHead(list5) && list5->p_head == NULL && list5->p_tail == NULL);
     assert(!removeHead(list5)); // Remove from empty list
     std::cout << "Passed" << std::endl;
     freeList(list5);
@@ -466,11 +464,11 @@ int main()
     int arr2[3] = {100, 110, 120};
     List *list6 = createListFromArray(arr2, 3);
     removeTail(list6);
-    assert(list6->p_tail->key == 110 && list6->p_tail->p_next == nullptr);
+    assert(list6->p_tail->key == 110 && list6->p_tail->p_next == NULL);
     removeTail(list6);
-    assert(list6->p_tail->key == 100 && list6->p_tail->p_next == nullptr && list6->p_head == list6->p_tail);
+    assert(list6->p_tail->key == 100 && list6->p_tail->p_next == NULL && list6->p_head == list6->p_tail);
     removeTail(list6);
-    assert(list6->p_head == nullptr && list6->p_tail == nullptr);
+    assert(list6->p_head == NULL && list6->p_tail == NULL);
     List *emptyList6 = new List();
     removeTail(emptyList6); // Remove from empty list
     std::cout << "Passed" << std::endl;
@@ -482,10 +480,10 @@ int main()
     int arr3[3] = {130, 140, 150};
     List *list7 = createListFromArray(arr3, 3);
     removeAll(list7);
-    assert(list7->p_head == nullptr && list7->p_tail == nullptr);
+    assert(list7->p_head == NULL && list7->p_tail == NULL);
     List *emptyList7 = new List();
     removeAll(emptyList7); // Remove from empty list
-    assert(emptyList7->p_head == nullptr && emptyList7->p_tail == nullptr);
+    assert(emptyList7->p_head == NULL && emptyList7->p_tail == NULL);
     std::cout << "Passed" << std::endl;
     freeList(emptyList7);
     freeList(list7);
@@ -564,7 +562,7 @@ int main()
     std::cout << "Test addPos: ";
     List *list10 = new List();
     assert(addPos(list10, 280, 0));
-    assert(list10->p_head != nullptr && list10->p_head->key == 280 && list10->p_tail->key == 280);
+    assert(list10->p_head != NULL && list10->p_head->key == 280 && list10->p_tail->key == 280);
     assert(addPos(list10, 290, 1));
     assert(list10->p_head->key == 280 && list10->p_tail->key == 290 && list10->p_head->p_next->key == 290);
     assert(addPos(list10, 300, 1));
@@ -588,17 +586,17 @@ int main()
     removePos(list11, 340, 0);
     assert(list11->p_head->key == 350 && list11->p_tail->key == 380);
     assert(list11->p_head->p_next->key == 360 && list11->p_head->p_next->p_next->key == 370 && list11->p_head->p_next->p_next->p_next->key == 380);
-    assert(list11->p_head->p_next->p_next->p_next->p_next == nullptr);
+    assert(list11->p_head->p_next->p_next->p_next->p_next == NULL);
     // testcase 2
     removePos(list11, 370, 2);
     assert(list11->p_head->key == 350 && list11->p_tail->key == 380);
     assert(list11->p_head->p_next->key == 360 && list11->p_head->p_next->p_next->key == 380);
-    assert(list11->p_head->p_next->p_next->p_next == nullptr);
+    assert(list11->p_head->p_next->p_next->p_next == NULL);
     // testcase 3
     removePos(list11, 350, 5); // Positions out of range
     assert(list11->p_head->key == 350 && list11->p_tail->key == 380);
     assert(list11->p_head->p_next->key == 360 && list11->p_head->p_next->p_next->key == 380);
-    assert(list11->p_head->p_next->p_next->p_next == nullptr);
+    assert(list11->p_head->p_next->p_next->p_next == NULL);
     // free memory
     freeList(list11);
     std::cout << "Passed" << std::endl;
@@ -711,7 +709,7 @@ int main()
     // Test case 4
     List *emptyList16 = new List();
     List *reversedList16_4 = reverseList(emptyList16);
-    assert(reversedList16_4->p_head == nullptr && reversedList16_4->p_tail == nullptr);
+    assert(reversedList16_4->p_head == NULL && reversedList16_4->p_tail == NULL);
     // free memory
     freeList(expectedList16);
     freeList(expectedList16_2);
@@ -766,7 +764,7 @@ int main()
     // Test case 6
     List *emptyList17 = new List();
     removeDuplicate(emptyList17);
-    assert(emptyList17->p_head == nullptr && emptyList17->p_tail == nullptr);
+    assert(emptyList17->p_head == NULL && emptyList17->p_tail == NULL);
     // free memory
     freeList(expectedList17);
     freeList(expectedList17_2);
@@ -821,7 +819,7 @@ int main()
     // Test case 6
     List *emptyList18 = new List();
     assert(!removeElement(emptyList18, 950)); // Remove from empty list
-    assert(emptyList18->p_head == nullptr && emptyList18->p_tail == nullptr);
+    assert(emptyList18->p_head == NULL && emptyList18->p_tail == NULL);
     // free memory
     freeList(expectedList18);
     freeList(expectedList18_2);

@@ -39,7 +39,7 @@ vector<vector<int>> convertMatrixToList(const string& filename) {
 
 vector<vector<int>> convertMatrixToList(const vector<vector<int>>& adjMatrix) {
     int n = adjMatrix.size();
-    vector<vector<int>> adjList(n);
+    vector<vector<int>> adjList(n,vector<int> (n,0));
     for(int i = 0;i < n;i++) {
         for(int j = 0;j < n;j++) {
             if(adjMatrix[i][j]) {
